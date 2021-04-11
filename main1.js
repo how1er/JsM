@@ -54,6 +54,37 @@ function createPlayer(player_object){
     return $player;
 }
 
+function changeHP(player){
+    const $playerLife=document.querySelector('.player'+ player.player+ ' .life');
+    const $randomButton=Math.ceil(Math.random()*20);
+    player.hp-=$randomButton;
+    if (player.hp<=0){
+        $playerLife.style.width=0+'%';
+        $randomButton.disabled = true;
+    }
+    else{
+        $playerLife.style.width=player.hp+'%';
+    }   
+}
+
+function playerWin(name){
+    const $winTitle = createElement('div','loseTitle');
+    $winTitle.innerText=name+' win';
+    return $winTitle;
+}
+
+$randomButton.addEventListener('click', function(){
+    if(player1.hp<=0){
+        $arenas.appendChild(playerWin(player2.name));
+    }
+    else if(player2.hp<=0){
+        $arenas.appendChild(playerWin(player1.name));
+    }
+    else{
+        changeHP(player1);
+        changeHP(player2);
+    }
+})
 
 $arenas.appendChild(createPlayer( player1));
 $arenas.appendChild(createPlayer( player2));
