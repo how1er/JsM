@@ -1,7 +1,10 @@
+const $arenas=document.querySelector('.arenas');
+const $randomButton=document.querySelector(".button");
+
 const player1={
     player:1,
     name:'Scorpion',
-    hp:50,
+    hp:100,
     img:'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon:['меч'],
     attack:function(){
@@ -12,7 +15,7 @@ const player1={
 const player2={
     player:2,
     name:'SUB-ZERO',
-    hp:80,
+    hp:50,
     img:'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon:['копье'],
     attack:function(){
@@ -29,26 +32,24 @@ function createElement(tag, className){
     return $tag;
 }
 
-const $arenas=createElement('div','arenas');
-document.body.appendChild($arenas);
-
-
 function createPlayer(player_object){
     const $player=createElement('div','player'+player_object.player);
     const $progressbar =createElement('div','progressbar');
     const $life =createElement('div','life');
     const $name =createElement('div','name');
-    const $character=createElement('div','charackter');
+    const $character=createElement('div','character');
     const $img=createElement('img');
 
-    $life.style.width=player_object.hp;
+    $life.style.width=player_object.hp+"%";
     $name.innerText=player_object.name;
     $img.src=player_object.img;
    
-    $progressbar.appendChild($life);
     $progressbar.appendChild($name);
+    $progressbar.appendChild($life);
+    
+    $character.appendChild($img);
+
     $player.appendChild($progressbar);
-     $character.appendChild($img);
     $player.appendChild($character);
     return $player;
 }
