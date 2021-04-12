@@ -59,12 +59,10 @@ function changeHP(player){
     const $randomButton=Math.ceil(Math.random()*20);
     player.hp-=$randomButton;
     if (player.hp<=0){
-        $playerLife.style.width=0+'%';
+        player.hp=0;
         $randomButton.disabled = true;
     }
-    else{
-        $playerLife.style.width=player.hp+'%';
-    }   
+    $playerLife.style.width=player.hp+'%';
 }
 
 function playerWin(name){
@@ -74,15 +72,13 @@ function playerWin(name){
 }
 
 $randomButton.addEventListener('click', function(){
-    if(player1.hp<=0){
-        $arenas.appendChild(playerWin(player2.name));
-    }
-    else if(player2.hp<=0){
+    changeHP(player1);
+    changeHP(player2);
+    if(player2.hp<=0){
         $arenas.appendChild(playerWin(player1.name));
     }
-    else{
-        changeHP(player1);
-        changeHP(player2);
+    else if(player1.hp<=0){
+        $arenas.appendChild(playerWin(player2.name));
     }
 })
 
